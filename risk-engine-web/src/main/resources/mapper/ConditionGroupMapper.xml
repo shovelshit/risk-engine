@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ljf.risk.engine.biz.dao.ConditionGroupDao">
+
+    <select id="listConditionGroup" resultMap="conditionGroupIncludeConditionMap">
+        SELECT cg.*,
+               c.id             as condition_id,
+               c.comparator     as condition_comparator,
+               c.description    as condition_description,
+               c.left_type      as condition_left_type,
+               c.left_value     as condition_left_value,
+               c.right_type     as condition_right_type,
+               c.right_value    as condition_right_value,
+               c.code           as condition_code,
+               c.left_property  as condition_left_property,
+               c.right_property as condition_right_property,
+               c.relation_id as condition_relation_id,
+               c.relation_type as condition_relation_type,
+               c.version as condition_version
+        FROM t_engine_condition_group cg
+                 LEFT JOIN t_engine_condition c on c.relation_id = cg.id and c.relation_type = 3
+        where cg.relation_id = #{relationId} and cg.relation_type = #{conditionRelationType}
+    </select>
+    <!-- 一对多：condition_group、condition -->
+    <resultMap id="conditionGroupIncludeConditionMap" extends="conditionGroupMap"
+               type="com.ljf.risk.engine.common.entity.ConditionGroup">
+        <collection property="conditionList" columnPrefix="condition_" resultMap="conditionMap">
+        </collection>
+    </resultMap>
+
+    <resultMap id="conditionGroupMap" type="com.ljf.risk.engine.common.entity.ConditionGroup">
+        <id property="id" column="id"/>
+        <result property="code" column="code"/>
+        <result property="description" column="description"/>
+        <result property="logic" column="logic"/>
+        <result property="createBy" column="create_by"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="relationId" column="relation_id"/>
+        <result property="relationType" column="relation_type"/>
+        <result property="version" column="version"/>
+    </resultMap>
+
+    <resultMap id="conditionMap" type="com.ljf.risk.engine.common.entity.Condition">
+        <id property="id" column="id"/>
+        <result property="code" column="code"/>
+        <result property="description" column="description"/>
+        <result property="leftType" column="left_type"/>
+        <result property="leftValue" column="left_value"/>
+        <result property="leftProperty" column="left_property"/>
+        <result property="rightType" column="right_type"/>
+        <result property="rightProperty" column="right_property"/>
+        <result property="rightValue" column="right_value"/>
+        <result property="comparator" column="comparator"/>
+        <result property="relationId" column="relation_id"/>
+        <result property="relationType" column="relation_type"/>
+        <result property="version" column="version"/>
+    </resultMap>
+</mapper>

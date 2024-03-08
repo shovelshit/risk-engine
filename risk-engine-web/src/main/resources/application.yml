@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: risk-engine
+  main:
+    allow-circular-references: true
+
+  profiles:
+    active: dev
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+
+  redis:
+    lettuce:
+      pool:
+        min-idle: 8
+        max-idle: 8
+        max-active: 8
+
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://root:2345678@localhost:3306/risk?characterEncoding=UTF-8&useSSL=false
+  datasource:
+    url: jdbc:h2:mem:risk;MODE=MySQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+
+server:
+  shutdown: graceful
+
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  typeAliasesPackage: com.ljf.risk.engine.common.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    jdbc-type-for-null: 'null'

@@ -24,7 +24,7 @@ CREATE TABLE `t_engine_condition` (
   `update_Time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `create_by` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='条件';
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='条件';
 
 -- ----------------------------
 -- Records of t_engine_condition
@@ -57,7 +57,7 @@ CREATE TABLE `t_engine_condition_group` (
   `create_by` varchar(50) CHARACTER SET utf8mb4 NOT NULL,
   `version` bigint(20) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='条件组';
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='条件组';
 
 -- ----------------------------
 -- Records of t_engine_condition_group
@@ -84,7 +84,7 @@ CREATE TABLE `t_engine_event` (
   `update_Time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `version` bigint(20) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='事件';
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='事件';
 
 -- ----------------------------
 -- Records of t_engine_event
