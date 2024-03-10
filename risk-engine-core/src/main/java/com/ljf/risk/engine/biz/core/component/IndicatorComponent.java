@@ -99,28 +99,4 @@ public class IndicatorComponent extends AbstractComponent<Long, Indicator> {
         indicatorHandle.accumulate(indicators);
     }
 
-//    @Override
-//    @PostMapping("test-indicator")
-//    public PlayLoadResponse<TestResponse> testIndicator(@RequestBody IndicatorAdmin.TestReq testReq) {
-//        try {
-//            if (Objects.isNull(testReq.getIndicatorId())) {
-//                return PlayLoadResponse.failurePlayLoad("", "参数必填");
-//            }
-//            Indicator indicator = indicatorService.getOne(new LambdaQueryWrapper<Indicator>().eq(Indicator::getId, testReq.getIndicatorId()));
-//            if (indicator == null) {
-//                return PlayLoadResponse.failurePlayLoad("", "该指标已被删除");
-//            }
-//
-//            indicator.setAnalysisPeriod(testReq.getPeriod());
-//            EngineApi.EngineCheckReq build = EngineApi.EngineCheckReq.builder().eventCode(null).eventDetails(testReq.getAttributes()).bizId(UUID.randomUUID().toString()).build();
-//            try (CurrentContext ignored = new CurrentContext(CurrentContext.Context.builder().eventTime(new Date()).engineCheckReq(build).build())) {
-//                analysis(Lists.newArrayList(indicator));
-//                Map<String, Object> indicatorResult = CurrentContext.currentCtx().getIndicatorResult();
-//                return PlayLoadResponse.success(IndicatorAdmin.TestResponse.builder().result(new ArrayList<>(indicatorResult.values()).get(0).toString()).build());
-//            }
-//        } catch (Exception e) {
-//            log.error("", e);
-//            return PlayLoadResponse.failurePlayLoad("", "获取指标结果失败");
-//        }
-//    }
 }

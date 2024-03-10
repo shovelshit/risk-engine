@@ -21,4 +21,9 @@ public enum CommonStatus {
     @JsonValue
     private String description;
 
+    public static boolean success(CommonStatus commonStatus) {
+        return commonStatus.equals(CommonStatus.YES);
+    }
+    
+
 }

@@ -1,4 +1,4 @@
-package com.ljf.risk.engine.core;
+package com.ljf.risk.engine.biz.core;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -31,31 +31,26 @@ public class EventController {
     }
 
     @PostMapping("page")
-    
     public Result pageEvent(@RequestBody @Validated PageReq<Event> event) {
         return Result.succ().data(eventService.pageEvent(event));
     }
 
     @PostMapping("update")
-    
     public Result update(@RequestBody @Validated(UpdateGroup.class) Event event) {
         return eventService.update(event) ? Result.succ() : Result.fail();
     }
 
     @DeleteMapping("delete")
-    
     public Result delete(@RequestBody @Validated(DeleteGroup.class) Event event) {
         return eventService.delete(event) ? Result.succ() : Result.fail();
     }
 
     @PostMapping("add")
-    
     public Result add(@RequestBody @Validated(InsertGroup.class) Event event) {
         return eventService.add(event) ? Result.succ() : Result.fail();
     }
 
     @PostMapping("relation-rule")
-    
     public Result add(@RequestBody @Validated PageReq<RelationRuleReq> relationRuleReqPageReq) {
         return Result.succ().data(eventService.pageRelationRule(relationRuleReqPageReq));
     }

@@ -28,13 +28,11 @@ public class PunishController {
     }
 
     @DeleteMapping("delete")
-    
     public Result delete(@RequestBody @Validated(DeleteGroup.class) Punish punish) {
         return punishService.delete(punish) ? Result.succ() : Result.fail();
     }
 
     @PostMapping("add")
-    
     public Result add(@RequestBody @Validated(InsertGroup.class) Punish punish) {
         return punishService.add(punish) ? Result.succ() : Result.fail();
     }

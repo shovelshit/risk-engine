@@ -15,8 +15,7 @@
                c.left_property  as condition_left_property,
                c.right_property as condition_right_property,
                c.relation_id as condition_relation_id,
-               c.relation_type as condition_relation_type,
-               c.version as condition_version
+               c.relation_type as condition_relation_type
         FROM t_engine_condition_group cg
                  LEFT JOIN t_engine_condition c on c.relation_id = cg.id and c.relation_type = 3
         where cg.relation_id = #{relationId} and cg.relation_type = #{conditionRelationType}
@@ -39,7 +38,6 @@
         <result property="updateTime" column="update_time"/>
         <result property="relationId" column="relation_id"/>
         <result property="relationType" column="relation_type"/>
-        <result property="version" column="version"/>
     </resultMap>
 
     <resultMap id="conditionMap" type="com.ljf.risk.engine.common.entity.Condition">
@@ -55,6 +53,5 @@
         <result property="comparator" column="comparator"/>
         <result property="relationId" column="relation_id"/>
         <result property="relationType" column="relation_type"/>
-        <result property="version" column="version"/>
     </resultMap>
 </mapper>

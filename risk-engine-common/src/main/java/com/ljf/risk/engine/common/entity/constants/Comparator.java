@@ -18,7 +18,7 @@ public enum Comparator {
     // 比较符
     EQ("等于", "=", String.class),
     GT("大于", ">", BigDecimal.class),
-    GR("大于等于", ">=", BigDecimal.class),
+    GE("大于等于", ">=", BigDecimal.class),
     LT("小于", "<", BigDecimal.class),
     LE("小于等于", "=<", BigDecimal.class),
     NE("不等于", "!=", String.class),

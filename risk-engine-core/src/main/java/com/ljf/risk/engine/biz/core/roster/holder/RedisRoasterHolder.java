@@ -25,7 +25,7 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * 适用日活小于名单数量,或者用户的活跃有明显的时间聚集性
  *
- * @author weiweihan
+ * @author lijinfeng
  */
 @Component
 @Slf4j

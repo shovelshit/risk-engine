@@ -157,7 +157,7 @@ CREATE TABLE `t_engine_rule` (
                                  `version` bigint(20) NOT NULL DEFAULT '0',
                                  `test` tinyint(4) NOT NULL DEFAULT '0',
                                  `return_message_id` bigint(20) DEFAULT NULL,
-                                 `result` int(11) NOT NULL COMMENT '0: 通过 1001: 拒绝',
+                                 `result` int(11) NOT NULL COMMENT '0: 通过 -1: 拒绝',
                                  `rule_group_id` bigint(20) DEFAULT NULL,
                                  `priority` int(11) NOT NULL DEFAULT '0'
 );

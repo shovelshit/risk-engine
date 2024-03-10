@@ -4,7 +4,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ljf.risk.engine.common.entity.PageReq;
 import com.ljf.risk.engine.common.entity.Rule;
+import com.ljf.risk.engine.common.entity.request.TestRuleReq;
 import com.ljf.risk.engine.common.entity.response.RelationDataRes;
+import com.ljf.risk.engine.common.entity.response.TestResponse;
 
 import java.util.Set;
 
@@ -25,7 +27,7 @@ public interface RuleService extends IService<Rule> {
 
     Set<String> ruleAllAttribute(Long ruleId);
 
-//    Object testRule(TestRuleReq testRuleReq);
+    TestResponse testRule(TestRuleReq testRuleReq);
 
     boolean updateStatus(Rule rule);
 }

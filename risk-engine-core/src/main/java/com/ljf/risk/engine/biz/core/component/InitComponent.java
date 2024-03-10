@@ -5,12 +5,8 @@ import com.ljf.risk.engine.biz.core.component.load.AbstractComponent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
-import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.stereotype.Component;
 
-import javax.sql.DataSource;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,11 +18,9 @@ import java.util.stream.Collectors;
 public class InitComponent implements InitializingBean {
 
     private final SpringContextComponent springContextComponent;
-    private final DataSource dataSource;
 
-    public InitComponent(SpringContextComponent springContextComponent, DataSource dataSource) {
+    public InitComponent(SpringContextComponent springContextComponent) {
         this.springContextComponent = springContextComponent;
-        this.dataSource = dataSource;
     }
 
     public boolean load() {
@@ -51,13 +45,6 @@ public class InitComponent implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        // 创建一个资源初始化器
-        ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
-        // 添加SQL脚本资源
-        populator.addScript(new ClassPathResource("db/schema-h2.sql"));
-        populator.addScript(new ClassPathResource("db/data-h2.sql"));
-        // 执行脚本
-        DatabasePopulatorUtils.execute(populator, dataSource);
         if(!load()){
             throw new Exception("ComponentLoad, 规则引擎核心数据初始化有误,停止项目启动,开发人员检查后在启动");
         }

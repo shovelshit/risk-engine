@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public enum RuleResult {
-    REJECT(1001, "拒绝"),
+    REJECT(-1, "拒绝"),
     PASS(0, "通过");
 
     @EnumValue

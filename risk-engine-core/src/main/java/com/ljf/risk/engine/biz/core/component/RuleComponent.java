@@ -1,6 +1,7 @@
 package com.ljf.risk.engine.biz.core.component;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.ljf.risk.engine.biz.core.CheckOutsideResult;
 import com.ljf.risk.engine.biz.core.SpringContextComponent;
 import com.ljf.risk.engine.biz.core.component.load.AbstractComponent;
 import com.ljf.risk.engine.biz.core.constants.CurrentContext;
@@ -30,7 +31,6 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Component
-//@RestController
 public class RuleComponent extends AbstractComponent<Long, Rule> {
 
     private final RuleService ruleService;
@@ -87,7 +87,7 @@ public class RuleComponent extends AbstractComponent<Long, Rule> {
             }
         }
         EngineCheckRes checkRes = EngineCheckRes.success();
-        CheckResult.CheckResultBuilder checkResultBuilder = CheckResult.builder().code(com.ljf.risk.engine.core.CheckOutsideResult.PASS.getCode()).msg(com.ljf.risk.engine.core.CheckOutsideResult.PASS.getMsg());
+        CheckResult.CheckResultBuilder checkResultBuilder = CheckResult.builder().code(CheckOutsideResult.PASS.getCode()).msg(CheckOutsideResult.PASS.getMsg());
         CheckDetails.CheckDetailsBuilder checkDetailsBuilder = CheckDetails.builder();
         checkResultBuilder.eventCode(CurrentContext.currentCtx().getEventCode()).eventCodeDesc(CurrentContext.currentCtx().getEventCodeDesc());
         if (CollectionUtils.isNotEmpty(hitRules)) {
@@ -101,14 +101,14 @@ public class RuleComponent extends AbstractComponent<Long, Rule> {
             checkDetailsBuilder.conditionResult(CurrentContext.currentCtx().getConditionResult());
             if (RuleResult.reject(hitRule.getResult())) {
                 ReturnMessage returnMessage = returnMessageComponent.getCacheByReturnMessageId(hitRule.getReturnMessageId());
-                checkResultBuilder.code(com.ljf.risk.engine.core.CheckOutsideResult.REJECT.getCode()).msg(com.ljf.risk.engine.core.CheckOutsideResult.REJECT.getMsg());
+                checkResultBuilder.code(CheckOutsideResult.REJECT.getCode()).msg(CheckOutsideResult.REJECT.getMsg());
                 if (returnMessage != null) {
                     checkDetailsBuilder.failedCode(returnMessage.getCode());
                     checkDetailsBuilder.failedMsg(returnMessage.getReturnMessage());
                 }
                 return checkRes.checkResult(checkResultBuilder.details(checkDetailsBuilder.build()).build());
             } else if (RuleResult.pass(hitRule.getResult())) {
-                checkResultBuilder.code(com.ljf.risk.engine.core.CheckOutsideResult.PASS.getCode()).msg(com.ljf.risk.engine.core.CheckOutsideResult.PASS.getMsg());
+                checkResultBuilder.code(CheckOutsideResult.PASS.getCode()).msg(CheckOutsideResult.PASS.getMsg());
                 return checkRes.checkResult(checkResultBuilder.details(checkDetailsBuilder.build()).build());
             }
         }
@@ -129,35 +129,4 @@ public class RuleComponent extends AbstractComponent<Long, Rule> {
         return conditionComponent.getConditionResult(conditionHit, conditionGroupHit, rule.getLogic(), ConditionRelationType.RULE);
     }
 
-//    @Override
-//    @PostMapping("test-rule")
-//    public PlayLoadResponse<TestResponse> testRule(@RequestBody TestRuleReq testRuleReq) {
-//        try {
-//            if (Objects.isNull(testRuleReq.getRuleId())) {
-//                return PlayLoadResponse.failurePlayLoad("", "参数必填");
-//            }
-//            Rule rule = ruleService.getOne(new LambdaQueryWrapper<Rule>().eq(Rule::getId, testRuleReq.getRuleId()));
-//            if (rule == null) {
-//                return PlayLoadResponse.failurePlayLoad("", "无相关规则");
-//            }
-//            InitComponent bean = springContextComponent.getBean(InitComponent.class);
-//            boolean load = bean.load();
-//            if (!load) {
-//                return PlayLoadResponse.failurePlayLoad("", "加载规则失败");
-//            }
-//            EngineCheckReq build = EngineCheckReq.builder().eventCode(null).eventDetails(testRuleReq.getAttributes()).bizId(UUID.randomUUID().toString()).build();
-//            try (CurrentContext ignored = new CurrentContext(CurrentContext.Context.builder().eventTime(new Date()).engineCheckReq(build).build())) {
-//                EngineCheckRes analyse = analyse(Lists.newArrayList(rule));
-//                return PlayLoadResponse.success(TestResponse.builder()
-//                        .ruleResult(analyse.getCheckResult().getMsg())
-//                        .functionResult(CurrentContext.currentCtx().getFunctionResult())
-//                        .indicatorResult(CurrentContext.currentCtx().getIndicatorResult())
-//                        .conditionResult(CurrentContext.currentCtx().getConditionResult())
-//                        .build());
-//            }
-//        } catch (Exception e) {
-//            log.error("", e);
-//            return PlayLoadResponse.failurePlayLoad("", "测试失败");
-//        }
-//    }
 }

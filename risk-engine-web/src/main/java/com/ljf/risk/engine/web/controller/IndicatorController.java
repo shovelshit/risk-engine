@@ -5,6 +5,7 @@ import com.ljf.risk.engine.common.entity.EventIndicatorRelation;
 import com.ljf.risk.engine.common.entity.Indicator;
 import com.ljf.risk.engine.common.entity.PageReq;
 import com.ljf.risk.engine.common.entity.Event;
+import com.ljf.risk.engine.common.entity.request.TestReq;
 import com.ljf.risk.engine.common.validation.group.DeleteGroup;
 import com.ljf.risk.engine.common.validation.group.InsertGroup;
 import com.ljf.risk.engine.common.validation.group.UpdateGroup;
@@ -70,10 +71,10 @@ public class IndicatorController {
         return Result.succ().data(indicatorService.relationData(indicatorId));
     }
 
-//    @PostMapping("test-indicator")
-//    public Result testIndicator(@RequestBody IndicatorAdmin.TestReq testReq) {
-//        return Result.succ().data(indicatorService.testIndicator(testReq));
-//    }
+    @PostMapping("test-indicator")
+    public Result testIndicator(@RequestBody TestReq testReq) {
+        return Result.succ().data(indicatorService.testIndicator(testReq));
+    }
 
     @Data
     @Builder

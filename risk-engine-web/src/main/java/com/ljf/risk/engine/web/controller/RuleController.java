@@ -3,6 +3,7 @@ package com.ljf.risk.engine.web.controller;
 import com.ljf.risk.engine.biz.service.RuleService;
 import com.ljf.risk.engine.common.entity.PageReq;
 import com.ljf.risk.engine.common.entity.Rule;
+import com.ljf.risk.engine.common.entity.request.TestRuleReq;
 import com.ljf.risk.engine.common.validation.group.DeleteGroup;
 import com.ljf.risk.engine.common.validation.group.InsertGroup;
 import com.ljf.risk.engine.common.validation.group.UpdateGroup;
@@ -69,11 +70,10 @@ public class RuleController {
         return Result.succ().data(ruleService.ruleAllAttribute(ruleId));
     }
 
-//    @PostMapping("test-rule")
-//
-//    public Result testRule(@RequestBody RuleAdmin.TestRuleReq testRuleReq) {
-//        return Result.succ().data(ruleService.testRule(testRuleReq));
-//    }
+    @PostMapping("test-rule")
+    public Result testRule(@RequestBody TestRuleReq testRuleReq) {
+        return Result.succ().data(ruleService.testRule(testRuleReq));
+    }
 
 
 }
